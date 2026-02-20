@@ -1,16 +1,24 @@
-import os
-api_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=api_key)
-
 import streamlit as st
 from openai import OpenAI
+import os
 
+# --------------------------------------------------
+# PAGE CONFIG
+# --------------------------------------------------
 st.set_page_config(page_title="AI PM Deep Tool", layout="wide")
-
 st.title("🚀 AI Product Manager - Deep Version")
-if api_key:
 
-    client = OpenAI(api_key=api_key)
+# --------------------------------------------------
+# LOAD API KEY FROM STREAMLIT CLOUD SECRETS
+# --------------------------------------------------
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    st.error("❌ OpenAI API Key not found. Add it in Streamlit Cloud → Secrets.")
+    st.stop()
+
+# Create OpenAI client
+client = OpenAI(api_key=api_key)
 
     tool = st.sidebar.selectbox(
         "Choose PM Tool",
