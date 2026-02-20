@@ -1,12 +1,13 @@
+import os
+api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=api_key)
+
 import streamlit as st
 from openai import OpenAI
 
 st.set_page_config(page_title="AI PM Deep Tool", layout="wide")
 
 st.title("🚀 AI Product Manager - Deep Version")
-
-api_key = st.sidebar.text_input("Enter OpenAI API Key", type="password")
-
 if api_key:
 
     client = OpenAI(api_key=api_key)
